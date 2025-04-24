@@ -6,7 +6,7 @@ import 'package:video_player/video_player.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../loading/loading_screen.dart';
-import '../ready/video_ready_screen.dart';
+import '../../widgets/ready/video_ready_widget.dart';
 
 class VideoPreviewScreen extends StatefulWidget {
   final File videoFile;
@@ -214,9 +214,9 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => VideoReadyScreen(
+                              builder: (context) => VideoReadyWidget(
                                 cameras: widget.cameras, // Bạn cần thêm cameras vào VideoPreviewScreen
-                                cameraController: widget.cameraController, // Và cả cameraController
+                                cameraController: widget.cameraController, onReadyPressed: () {  }, // Và cả cameraController
                               ),
                             ),
                           );

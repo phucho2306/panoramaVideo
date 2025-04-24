@@ -1,7 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';// Thêm import này để sử dụng SystemChrome
-import 'presentation/views/ready/video_ready_screen.dart';
+import 'package:flutter/services.dart';
+import 'package:panorama_capture/presentation/views/recorder/video_recorder_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: _isCameraInitialized
-          ? VideoReadyScreen(
+          ? VideoRecorderScreen(
         cameras: widget.cameras,
         cameraController: _cameraController,
       )
