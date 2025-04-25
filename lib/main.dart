@@ -1,13 +1,12 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:panorama_capture/presentation/views/recorder/video_recorder_screen.dart';
+import 'presentation/views/ready/video_ready_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final cameras = await availableCameras();
 
-  // Ẩn status bar ngay từ đầu trên toàn ứng dụng
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   runApp(MyApp(cameras: cameras));
@@ -57,7 +56,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: _isCameraInitialized
-          ? VideoRecorderScreen(
+          ? VideoReadyScreen(
         cameras: widget.cameras,
         cameraController: _cameraController,
       )

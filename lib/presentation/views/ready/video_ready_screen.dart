@@ -2,46 +2,47 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:panorama_capture/presentation/cubit/video_ready/video_ready_cubit.dart';
+import '../../cubits/video_ready_cubit.dart';
+import '../recorder/video_recorder_screen.dart';
 
-class VideoReadyWidget extends StatelessWidget {
+
+class VideoReadyScreen extends StatelessWidget {
   final List<CameraDescription> cameras;
   final CameraController cameraController;
-  final VoidCallback onReadyPressed;
 
-  const VideoReadyWidget({
+  const VideoReadyScreen({
     Key? key,
     required this.cameras,
     required this.cameraController,
-    required this.onReadyPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => VideoReadyCubit(cameraController)..initializeCamera(),
-      child: BlocBuilder<VideoReadyCubit, VideoReadyState>(
-        builder: (context, state) {
-          if (state.error != null) {
-            return Center(child: Text(state.error!));
-          }
-          return state.isCameraInitialized
-              ? Stack(
-                  children: [
-                    Stack(
-                      children: [
-                        SizedBox.expand(
-                          child: CameraPreview(cameraController),
+      create: (context) => VideoReadyCubit(cameraController: cameraController),
+      child: Scaffold(
+        body: BlocBuilder<VideoReadyCubit, VideoReadyState>(
+          builder: (context, state) {
+            if (state is VideoReadyLoading || state is VideoReadyInitial) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is VideoReadyInitialized) {
+              return Stack(
+                children: [
+                  Stack(
+                    children: [
+                      SizedBox.expand(
+                        child: CameraPreview(state.cameraController),
+                      ),
+                      SizedBox.expand(
+                        child: Container(
+                          color: Colors.black.withOpacity(0.7),
                         ),
-                        SizedBox.expand(
-                          child: Container(
-                            color: Colors.black.withOpacity(0.7),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Opacity(
-                      opacity: 0.7,
+                      ),
+                    ],
+                  ),
+                  Opacity(
+                    opacity: 0.7,
+                    child: SafeArea(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -67,10 +68,9 @@ class VideoReadyWidget extends StatelessWidget {
                                 width: 165,
                                 height: 165,
                               ),
-                              SizedBox(height: 50),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 40.0),
+                              const SizedBox(height: 50),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 40.0),
                                 child: Text(
                                   'Keep the phone in a fixed position and record a video all around.',
                                   textAlign: TextAlign.center,
@@ -82,10 +82,9 @@ class VideoReadyWidget extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 16),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 40.0),
+                              const SizedBox(height: 16),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 40.0),
                                 child: Text(
                                   'Holding your phone steady while rotating helps enhance the image quality during a 360 tour.',
                                   textAlign: TextAlign.center,
@@ -100,9 +99,8 @@ class VideoReadyWidget extends StatelessWidget {
                           ),
                           Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 85.0),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 85.0),
                                 child: Text(
                                   'Move closer to the door to start your first point in the 360 tour',
                                   textAlign: TextAlign.center,
@@ -113,26 +111,35 @@ class VideoReadyWidget extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 25),
+                              const SizedBox(height: 25),
                               Padding(
                                 padding: const EdgeInsets.all(16.0),
                                 child: Transform.translate(
-                                  offset: Offset(0, -30),
+                                  offset: const Offset(0, -30),
                                   child: ElevatedButton(
-                                    onPressed: onReadyPressed,
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => VideoRecorderScreen(
+                                            cameras: cameras,
+                                            cameraController: state.cameraController,
+                                          ),
+                                        ),
+                                      );
+                                    },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xFFCD9B4B),
+                                      backgroundColor: const Color(0xFFCD9B4B),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(99),
-                                        side: BorderSide(
+                                        side: const BorderSide(
                                           color: Colors.white,
                                           width: 4,
                                         ),
                                       ),
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 30, vertical: 20),
+                                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       'READY TO RECORD',
                                       style: TextStyle(
                                         color: Colors.white,
@@ -149,10 +156,13 @@ class VideoReadyWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ],
-                )
-              : Center(child: CircularProgressIndicator());
-        },
+                  ),
+                ],
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ),
       ),
     );
   }

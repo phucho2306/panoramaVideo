@@ -1,7 +1,10 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:io';
+
+import '../../cubits/stop_notify_cubit.dart';
 
 Future<String?> showStopNotifyBottomSheet({
   required BuildContext context,
@@ -9,16 +12,51 @@ Future<String?> showStopNotifyBottomSheet({
   required List<CameraDescription> cameras,
   required CameraController cameraController,
 }) {
-  final screenHeight = MediaQuery.of(context).size.height;
-
   return showModalBottomSheet<String>(
     context: context,
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
     ),
-    builder: (context) {
-      return Container(
+    builder: (context) => BlocProvider(
+      create: (context) => StopNotifyCubit(),
+      child: Builder(
+        builder: (newContext) => _StopNotifyBottomSheet(
+          context: newContext,
+          videoFile: videoFile,
+          cameras: cameras,
+          cameraController: cameraController,
+        ),
+      ),
+    ),
+  );
+}
+
+class _StopNotifyBottomSheet extends StatelessWidget {
+  final BuildContext context;
+  final File videoFile;
+  final List<CameraDescription> cameras;
+  final CameraController cameraController;
+
+  const _StopNotifyBottomSheet({
+    Key? key,
+    required this.context,
+    required this.videoFile,
+    required this.cameras,
+    required this.cameraController,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return BlocListener<StopNotifyCubit, StopNotifyState>(
+      listener: (context, state) {
+        if (state is StopNotifyActionSelected) {
+          Navigator.pop(context, state.action);
+        }
+      },
+      child: Container(
         height: screenHeight * 0.5,
         padding: const EdgeInsets.all(16.0),
         decoration: const BoxDecoration(
@@ -70,7 +108,7 @@ Future<String?> showStopNotifyBottomSheet({
                   width: 179,
                   child: OutlinedButton(
                     onPressed: () {
-                      Navigator.pop(context, 'Preview');
+                      context.read<StopNotifyCubit>().selectPreview();
                     },
                     style: OutlinedButton.styleFrom(
                       foregroundColor: const Color(0xFF00284B),
@@ -93,7 +131,7 @@ Future<String?> showStopNotifyBottomSheet({
                   width: 185,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context, 'Confirm');
+                      context.read<StopNotifyCubit>().selectConfirm();
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF00284B),
@@ -116,7 +154,7 @@ Future<String?> showStopNotifyBottomSheet({
             ),
           ],
         ),
-      );
-    },
-  );
+      ),
+    );
+  }
 }
