@@ -19,3 +19,12 @@ class VideoReadyInitialized extends VideoReadyState {
   @override
   List<Object> get props => [cameraController];
 }
+
+class VideoReadyError extends VideoReadyState {
+  final String message;
+
+  const VideoReadyError({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

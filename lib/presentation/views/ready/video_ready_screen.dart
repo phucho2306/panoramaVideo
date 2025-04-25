@@ -5,7 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../cubits/video_ready_cubit.dart';
 import '../recorder/video_recorder_screen.dart';
 
-
 class VideoReadyScreen extends StatelessWidget {
   final List<CameraDescription> cameras;
   final CameraController cameraController;
@@ -19,12 +18,17 @@ class VideoReadyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => VideoReadyCubit(cameraController: cameraController),
+      create: (context) => VideoReadyCubit(
+        cameraController: cameraController,
+        cameras: cameras,
+      ),
       child: Scaffold(
         body: BlocBuilder<VideoReadyCubit, VideoReadyState>(
           builder: (context, state) {
             if (state is VideoReadyLoading || state is VideoReadyInitial) {
               return const Center(child: CircularProgressIndicator());
+            } else if (state is VideoReadyError) {
+              return Center(child: Text(state.message, style: const TextStyle(color: Colors.white)));
             } else if (state is VideoReadyInitialized) {
               return Stack(
                 children: [
@@ -47,16 +51,20 @@ class VideoReadyScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SvgPicture.asset(
-                                  'assets/images/Button.svg',
-                                  width: 100,
-                                  height: 50,
-                                  fit: BoxFit.contain,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pop(context); // Quay lại màn hình trước đó
+                                  },
+                                  child: SvgPicture.asset(
+                                    'assets/images/Button.svg',
+                                    width: 100,
+                                    height: 50,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ],
                             ),
