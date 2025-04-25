@@ -20,7 +20,7 @@ import '../video/video_preview_screen.dart';
 class VideoRecorderScreen extends StatelessWidget {
   final List<CameraDescription> cameras;
   final CameraController cameraController;
-  final VideoRecorderCubit? existingCubit; // Thêm tham số để nhận cubit hiện có
+  final VideoRecorderCubit? existingCubit;
 
   const VideoRecorderScreen({
     Key? key,
@@ -38,7 +38,6 @@ class VideoRecorderScreen extends StatelessWidget {
       child: BlocListener<VideoRecorderCubit, VideoRecorderState>(
         listener: (context, state) {
           if (state is VideoRecorderStopped) {
-            // Kiểm tra để đảm bảo bottom sheet chỉ hiển thị một lần
             if (ModalRoute.of(context)?.isCurrent == true) {
               showStopNotifyBottomSheet(
                 context: context,
@@ -221,11 +220,10 @@ class VideoRecorderScreen extends StatelessWidget {
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      color: Colors.black.withOpacity(0.4),
-                      child: Transform.translate(
-                        offset: const Offset(0, -10),
+                    child: SafeArea(
+                      top: false,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -238,16 +236,13 @@ class VideoRecorderScreen extends StatelessWidget {
                                   ),
                                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                                   decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.3),
+                                    color: Colors.black.withOpacity(0.6),
                                     borderRadius: BorderRadius.circular(24),
                                   ),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        width: 16,
-                                        height: 16,
-                                      ),
+                                      const SizedBox(width: 16),
                                       Text(
                                         displayPercentage,
                                         style: const TextStyle(
@@ -285,7 +280,7 @@ class VideoRecorderScreen extends StatelessWidget {
                                   ),
                                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                                   decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.3),
+                                    color: Colors.black.withOpacity(0.6),
                                     borderRadius: BorderRadius.circular(24),
                                   ),
                                   child: Row(

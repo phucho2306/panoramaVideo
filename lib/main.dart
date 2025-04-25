@@ -33,11 +33,23 @@ class _MyAppState extends State<MyApp> {
   Future<void> _initializeCamera() async {
     _cameraController = CameraController(
       widget.cameras.firstWhere(
-              (camera) => camera.lensDirection == CameraLensDirection.back),
-      ResolutionPreset.high,
+            (camera) => camera.lensDirection == CameraLensDirection.back,
+      ),
+      ResolutionPreset.max,
       enableAudio: false,
+      imageFormatGroup: ImageFormatGroup.jpeg,
     );
+
     await _cameraController.initialize();
+
+    try {
+      await _cameraController.setFocusMode(FocusMode.auto);
+      await _cameraController.setExposureMode(ExposureMode.auto);
+      await _cameraController.lockCaptureOrientation(DeviceOrientation.portraitUp);
+    } catch (e) {
+      debugPrint("Camera advanced config error: $e");
+    }
+
     if (mounted) {
       setState(() {
         _isCameraInitialized = true;

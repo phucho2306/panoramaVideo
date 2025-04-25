@@ -33,8 +33,14 @@ class VideoRecorderCubit extends Cubit<VideoRecorderState> {
 
   Future<void> _initialize() async {
     emit(VideoRecorderLoading());
-    if (!cameraController.value.isInitialized) {
-      await cameraController.initialize();
+    try {
+      if (!cameraController.value.isInitialized) {
+        await cameraController.initialize();
+      }
+      // Không cần gọi initializeFocus vì camera đã được cấu hình trong VideoReadyCubit
+    } catch (e) {
+      emit(VideoRecorderError(message: "Error initializing camera: $e"));
+      return;
     }
 
     _accelerometerSubscription = accelerometerEvents.listen((event) {
