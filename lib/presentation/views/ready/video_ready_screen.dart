@@ -60,7 +60,7 @@ class VideoReadyScreen extends StatelessWidget {
                                     Navigator.pop(context); // Quay lại màn hình trước đó
                                   },
                                   child: SvgPicture.asset(
-                                    'assets/images/Button.svg',
+                                    'lib/assets/images/Button.svg',
                                     width: 100,
                                     height: 50,
                                     fit: BoxFit.contain,
@@ -72,7 +72,7 @@ class VideoReadyScreen extends StatelessWidget {
                           Column(
                             children: [
                               SvgPicture.asset(
-                                'assets/images/IconReady.svg',
+                                'lib/assets/images/IconReady.svg',
                                 width: 165,
                                 height: 165,
                               ),

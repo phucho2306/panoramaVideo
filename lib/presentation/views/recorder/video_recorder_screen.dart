@@ -154,7 +154,7 @@ class VideoRecorderScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
-                                'assets/images/Frame_1261158946.svg',
+                                'lib/assets/images/Frame_1261158946.svg',
                                 width: 48,
                                 height: 36,
                               ),
@@ -196,7 +196,7 @@ class VideoRecorderScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SvgPicture.asset(
-                                  'assets/images/Frame.svg',
+                                  'lib/assets/images/Frame.svg',
                                   width: 50,
                                   height: 50,
                                 ),
@@ -272,7 +272,7 @@ class VideoRecorderScreen extends StatelessWidget {
                                 : InkWell(
                               onTap: cubit.startRecording,
                               child: SvgPicture.asset(
-                                'assets/images/Oval.svg',
+                                'lib/assets/images/Oval.svg',
                                 width: 100,
                                 height: 100,
                               ),
@@ -346,7 +346,7 @@ class VideoRecorderScreen extends StatelessWidget {
                                 );
                               },
                               child: SvgPicture.asset(
-                                'assets/images/Button.svg',
+                                'lib/assets/images/Button.svg',
                                 width: 200,
                                 height: 50,
                               ),

@@ -23,15 +23,16 @@ class _PanoramaState extends State<Panorama> {
   }
 
   Future<void> _initializeCamera() async {
+    cameras = await availableCameras();
+
     _cameraController = CameraController(
       cameras.firstWhere((camera) => camera.lensDirection == CameraLensDirection.back),
-      ResolutionPreset.max,
+      ResolutionPreset.high,
       enableAudio: false,
       imageFormatGroup: ImageFormatGroup.jpeg,
     );
 
     await _cameraController.initialize();
-    cameras = await availableCameras();
 
     try {
       await _cameraController.setFocusMode(FocusMode.auto);
@@ -56,12 +57,8 @@ class _PanoramaState extends State<Panorama> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:
-          _isCameraInitialized
-              ? VideoReadyScreen(cameras: cameras, cameraController: _cameraController)
-              : Center(child: CircularProgressIndicator()),
-    );
+    return _isCameraInitialized
+        ? VideoReadyScreen(cameras: cameras, cameraController: _cameraController)
+        : Center(child: CircularProgressIndicator());
   }
 }

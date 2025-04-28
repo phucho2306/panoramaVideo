@@ -59,7 +59,7 @@ class CenterCompassArrow extends StatelessWidget {
                         Transform.rotate(
                           angle: angle,
                           child: SvgPicture.asset(
-                            'assets/images/Group_294.svg',
+                            'lib/assets/images/Group_294.svg',
                             width: 70,
                             height: 70,
                           ),

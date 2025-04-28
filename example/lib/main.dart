@@ -16,9 +16,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _panoramaPlugin = Panorama();
-
   @override
   void initState() {
     super.initState();

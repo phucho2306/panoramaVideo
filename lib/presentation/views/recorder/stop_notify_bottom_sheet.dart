@@ -76,7 +76,7 @@ class _StopNotifyBottomSheet extends StatelessWidget {
         child: Column(
           children: [
             SvgPicture.asset(
-              'assets/images/Icon.svg',
+              'lib/assets/images/Icon.svg',
               width: 80,
               height: 80,
             ),

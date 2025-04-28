@@ -37,7 +37,7 @@ class CompassArrow extends StatelessWidget {
                 child: Transform.rotate(
                   angle: -pi / 2,
                   child: Lottie.asset(
-                    'assets/lotte/Animation-1744724072689.json',
+                    'lib/assets/lotte/Animation-1744724072689.json',
                     repeat: true,
                     fit: BoxFit.contain,
                   ),

@@ -110,12 +110,12 @@ class LoadingScreen extends StatelessWidget {
                                     width: 600,
                                     height: 300,
                                     child: Lottie.asset(
-                                      'assets/lotte/TFOYB36zfH.json',
+                                      'lib/assets/lotte/TFOYB36zfH.json',
                                       fit: BoxFit.contain,
                                     ),
                                   ),
                                   SvgPicture.asset(
-                                    'assets/images/Icons.svg',
+                                    'lib/assets/images/Icons.svg',
                                     width: 300,
                                     height: 130,
                                   ),
