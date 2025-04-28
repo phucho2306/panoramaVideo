@@ -1,18 +1,13 @@
 import 'package:camera/camera.dart';
+import 'package:capture_360_inside/presentation/views/recorder/stop_notify_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_compass/flutter_compass.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:panorama/presentation/views/recorder/stop_notify_bottom_sheet.dart';
-import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
-import 'dart:io';
-
 import '../../cubits/video_recorder_cubit.dart';
 import '../../widgets/compass/center_compass_arrow.dart';
 import '../../widgets/compass/compass_arrow.dart';
 import '../../widgets/painters/arrow_painter.dart';
 import '../../widgets/painters/grid_painter.dart';
-import '../image_view/image_view_screen.dart';
 import '../loading/loading_screen.dart';
 import '../ready/video_ready_screen.dart';
 import '../video/video_preview_screen.dart';
@@ -141,7 +136,7 @@ class VideoRecorderScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
-                                'packages/panorama/assets/images/Frame_1261158946.svg',
+                                'packages/capture_360_inside/assets/images/Frame_1261158946.svg',
                                 width: 48,
                                 height: 36,
                               ),
@@ -176,7 +171,11 @@ class VideoRecorderScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset('packages/panorama/assets/images/Frame.svg', width: 50, height: 50),
+                                SvgPicture.asset(
+                                  'packages/capture_360_inside/assets/images/Frame.svg',
+                                  width: 50,
+                                  height: 50,
+                                ),
                                 const SizedBox(width: 8),
                                 const Flexible(
                                   child: Text(
@@ -247,7 +246,7 @@ class VideoRecorderScreen extends StatelessWidget {
                                 : InkWell(
                                   onTap: cubit.startRecording,
                                   child: SvgPicture.asset(
-                                    'packages/panorama/assets/images/Oval.svg',
+                                    'packages/capture_360_inside/assets/images/Oval.svg',
                                     width: 100,
                                     height: 100,
                                   ),
@@ -315,7 +314,7 @@ class VideoRecorderScreen extends StatelessWidget {
                                 );
                               },
                               child: SvgPicture.asset(
-                                'packages/panorama/assets/images/Button.svg',
+                                'packages/capture_360_inside/assets/images/Button.svg',
                                 width: 200,
                                 height: 50,
                               ),

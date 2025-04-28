@@ -1,10 +1,10 @@
 import Flutter
 import UIKit
 
-public class PanoramaPlugin: NSObject, FlutterPlugin {
+public class Capture360InsidePlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "panorama", binaryMessenger: registrar.messenger())
-    let instance = PanoramaPlugin()
+    let channel = FlutterMethodChannel(name: "capture_360_inside_plugin", binaryMessenger: registrar.messenger())
+    let instance = Capture360InsidePlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 

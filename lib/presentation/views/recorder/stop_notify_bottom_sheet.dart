@@ -66,7 +66,7 @@ class _StopNotifyBottomSheet extends StatelessWidget {
         ),
         child: Column(
           children: [
-            SvgPicture.asset('packages/panorama/assets/images/Icon.svg', width: 80, height: 80),
+            SvgPicture.asset('packages/capture_360_inside/assets/images/Icon.svg', width: 80, height: 80),
             const SizedBox(height: 16.0),
             const Text(
               'Complete the Video\n Recording',

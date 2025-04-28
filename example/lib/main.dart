@@ -1,5 +1,5 @@
+import 'package:capture_360_inside/panorama.dart';
 import 'package:flutter/material.dart';
-import 'package:panorama/panorama.dart';
 
 void main() {
   runApp(const MyApp());

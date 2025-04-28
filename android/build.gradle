@@ -1,4 +1,4 @@
-group = "com.example.panorama"
+group = "com.example.capture_360_inside"
 version = "1.0-SNAPSHOT"
 
 buildscript {
@@ -25,7 +25,7 @@ apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
 android {
-    namespace = "com.example.panorama"
+    namespace = "com.example.capture_360_inside"
 
     compileSdk = 35
 

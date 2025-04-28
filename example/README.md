@@ -1,6 +1,6 @@
 # panorama_example
 
-Demonstrates how to use the panorama plugin.
+Demonstrates how to use the capture_360_inside plugin.
 
 ## Getting Started
 

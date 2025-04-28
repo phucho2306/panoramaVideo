@@ -1,4 +1,4 @@
-name: panorama
+name: capture_360_inside
 description: "A new Flutter plugin project."
 version: 0.0.1
 homepage:
@@ -55,10 +55,10 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.example.panorama
-        pluginClass: PanoramaPlugin
+        package: com.example.capture_360_inside
+        pluginClass: Capture360InsidePlugin
       ios:
-        pluginClass: PanoramaPlugin
+        pluginClass: Capture360InsidePlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   assets:

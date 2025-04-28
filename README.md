@@ -1,4 +1,4 @@
-# panorama
+# capture_360_inside
 
 A new Flutter plugin project.
 
