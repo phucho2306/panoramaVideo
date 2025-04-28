@@ -4,12 +4,12 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:panorama_capture/presentation/views/recorder/video_recorder_screen.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../cubits/video_preview_cubit.dart';
 import '../loading/loading_screen.dart';
 import '../ready/video_ready_screen.dart';
+import '../recorder/video_recorder_screen.dart';
 
 class VideoPreviewScreen extends StatelessWidget {
   final File videoFile;

@@ -7,7 +7,6 @@ import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../cubits/loading_cubit.dart';
-import '../hotspot/confirm_hotspot.dart';
 import '../image_view/image_view_screen.dart';
 
 class LoadingScreen extends StatelessWidget {
@@ -158,10 +157,10 @@ class LoadingScreen extends StatelessWidget {
                             const SizedBox(height: 20),
                             ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const ConfirmHotsPot()),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(builder: (context) => const ConfirmHotsPot()),
+                                // );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF00284B),

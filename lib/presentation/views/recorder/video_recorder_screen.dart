@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:panorama_capture/presentation/views/ready/video_ready_screen.dart';
-import 'package:panorama_capture/presentation/views/recorder/stop_notify_bottom_sheet.dart';
+import 'package:panorama/presentation/views/recorder/stop_notify_bottom_sheet.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 import 'dart:io';
 
@@ -15,6 +14,7 @@ import '../../widgets/painters/arrow_painter.dart';
 import '../../widgets/painters/grid_painter.dart';
 import '../image_view/image_view_screen.dart';
 import '../loading/loading_screen.dart';
+import '../ready/video_ready_screen.dart';
 import '../video/video_preview_screen.dart';
 
 class VideoRecorderScreen extends StatelessWidget {
