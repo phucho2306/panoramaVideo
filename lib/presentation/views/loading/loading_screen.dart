@@ -26,14 +26,10 @@ class LoadingScreen extends StatelessWidget {
           if (state is LoadingSuccess) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(
-                builder: (context) => ImageViewScreen(base64Image: state.base64Image),
-              ),
+              MaterialPageRoute(builder: (context) => ImageViewScreen(base64Image: state.base64Image)),
             );
           } else if (state is LoadingError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
             Navigator.pop(context);
           }
         },
@@ -87,11 +83,7 @@ class LoadingScreen extends StatelessWidget {
                               SizedBox(height: 8),
                               Text(
                                 'Please wait...',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Color(0xFF00284B),
-                                  fontFamily: 'Inter',
-                                ),
+                                style: TextStyle(fontSize: 16, color: Color(0xFF00284B), fontFamily: 'Inter'),
                               ),
                             ],
                           ),
@@ -110,12 +102,12 @@ class LoadingScreen extends StatelessWidget {
                                     width: 600,
                                     height: 300,
                                     child: Lottie.asset(
-                                      'lib/assets/lotte/TFOYB36zfH.json',
+                                      'packages/panorama/assets/lotte/TFOYB36zfH.json',
                                       fit: BoxFit.contain,
                                     ),
                                   ),
                                   SvgPicture.asset(
-                                    'lib/assets/images/Icons.svg',
+                                    'packages/panorama/assets/images/Icons.svg',
                                     width: 300,
                                     height: 130,
                                   ),
@@ -124,10 +116,7 @@ class LoadingScreen extends StatelessWidget {
                               const SizedBox(height: 0),
                               const Text(
                                 'Creating 360 Room Image ...',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Color(0xFF688094),
-                                ),
+                                style: TextStyle(fontSize: 16, color: Color(0xFF688094)),
                               ),
                             ],
                           ),
@@ -138,9 +127,7 @@ class LoadingScreen extends StatelessWidget {
                         width: double.infinity,
                         height: 200,
                         padding: const EdgeInsets.only(top: 20, bottom: 40, left: 16, right: 16),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                        ),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -148,11 +135,7 @@ class LoadingScreen extends StatelessWidget {
                             const Text(
                               "Feel free to return to the homepage. We'll notify you when it's completed.",
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'Inter',
-                                color: Color(0xFF4E6A82),
-                              ),
+                              style: TextStyle(fontSize: 16, fontFamily: 'Inter', color: Color(0xFF4E6A82)),
                             ),
                             const SizedBox(height: 20),
                             ElevatedButton(
@@ -170,11 +153,7 @@ class LoadingScreen extends StatelessWidget {
                               ),
                               child: const Text(
                                 'BACK TO HOME SCREEN',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontFamily: 'Inter',
-                                ),
+                                style: TextStyle(color: Colors.white, fontSize: 14, fontFamily: 'Inter'),
                               ),
                             ),
                           ],

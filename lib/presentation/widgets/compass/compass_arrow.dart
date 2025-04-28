@@ -6,7 +6,6 @@ import 'package:lottie/lottie.dart';
 
 import '../../cubits/compass_arrow_cubit.dart';
 
-
 class CompassArrow extends StatelessWidget {
   const CompassArrow({Key? key}) : super(key: key);
 
@@ -25,11 +24,7 @@ class CompassArrow extends StatelessWidget {
             children: [
               const Text(
                 "Slide Phone to the Right",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 width: 24,
@@ -37,7 +32,7 @@ class CompassArrow extends StatelessWidget {
                 child: Transform.rotate(
                   angle: -pi / 2,
                   child: Lottie.asset(
-                    'lib/assets/lotte/Animation-1744724072689.json',
+                    'packages/panorama/assets/lotte/Animation-1744724072689.json',
                     repeat: true,
                     fit: BoxFit.contain,
                   ),

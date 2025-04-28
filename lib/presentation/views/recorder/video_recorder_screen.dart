@@ -22,13 +22,8 @@ class VideoRecorderScreen extends StatelessWidget {
   final CameraController cameraController;
   final VideoRecorderCubit? existingCubit;
 
-  const VideoRecorderScreen({
-    Key? key,
-    required this.cameras,
-    required this.cameraController,
-    this.existingCubit,
-  }) : super(key: key);
-
+  const VideoRecorderScreen({Key? key, required this.cameras, required this.cameraController, this.existingCubit})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,19 +45,18 @@ class VideoRecorderScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => VideoPreviewScreen(
-                        videoFile: state.videoFile,
-                        cameras: cameras,
-                        cameraController: cameraController,
-                      ),
+                      builder:
+                          (context) => VideoPreviewScreen(
+                            videoFile: state.videoFile,
+                            cameras: cameras,
+                            cameraController: cameraController,
+                          ),
                     ),
                   );
                 } else if (result == 'Confirm') {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => LoadingScreen(videoFile: state.videoFile),
-                    ),
+                    MaterialPageRoute(builder: (context) => LoadingScreen(videoFile: state.videoFile)),
                   );
                 }
               });
@@ -82,32 +76,29 @@ class VideoRecorderScreen extends StatelessWidget {
             }
 
             final isRecording = state is VideoRecorderRecording;
-            final isTiltOk = state is VideoRecorderReady
-                ? state.isTiltOk
-                : state is VideoRecorderRecording
-                ? state.isTiltOk
-                : true;
-            final tiltAngle = state is VideoRecorderReady
-                ? state.tiltAngle
-                : state is VideoRecorderRecording
-                ? state.tiltAngle
-                : 0.0;
-            final accumulatedRotation = state is VideoRecorderRecording
-                ? state.accumulatedRotation
-                : 0.0;
-            final showDirectionWarning = state is VideoRecorderRecording
-                ? state.showDirectionWarning
-                : false;
-            final recordingSeconds = state is VideoRecorderRecording
-                ? state.recordingSeconds
-                : 0;
+            final isTiltOk =
+                state is VideoRecorderReady
+                    ? state.isTiltOk
+                    : state is VideoRecorderRecording
+                    ? state.isTiltOk
+                    : true;
+            final tiltAngle =
+                state is VideoRecorderReady
+                    ? state.tiltAngle
+                    : state is VideoRecorderRecording
+                    ? state.tiltAngle
+                    : 0.0;
+            final accumulatedRotation = state is VideoRecorderRecording ? state.accumulatedRotation : 0.0;
+            final showDirectionWarning = state is VideoRecorderRecording ? state.showDirectionWarning : false;
+            final recordingSeconds = state is VideoRecorderRecording ? state.recordingSeconds : 0;
 
             int percentage = ((accumulatedRotation / 360) * 100).toInt();
-            String displayPercentage = percentage < 0
-                ? "0%"
-                : percentage > 100
-                ? "100%"
-                : "$percentage%";
+            String displayPercentage =
+                percentage < 0
+                    ? "0%"
+                    : percentage > 100
+                    ? "100%"
+                    : "$percentage%";
 
             return Scaffold(
               extendBodyBehindAppBar: true,
@@ -123,9 +114,7 @@ class VideoRecorderScreen extends StatelessWidget {
                   CustomPaint(size: Size.infinite, painter: GridPainter()),
                   CustomPaint(
                     size: Size.infinite,
-                    painter: ArrowPainter(
-                      color: isTiltOk ? const Color(0xFFFFCC00) : const Color(0xFFFFFFFF),
-                    ),
+                    painter: ArrowPainter(color: isTiltOk ? const Color(0xFFFFCC00) : const Color(0xFFFFFFFF)),
                   ),
                   Transform.rotate(
                     angle: tiltAngle * 0.1,
@@ -145,16 +134,14 @@ class VideoRecorderScreen extends StatelessWidget {
                       child: Card(
                         color: Colors.black.withOpacity(0.3),
                         elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
-                                'lib/assets/images/Frame_1261158946.svg',
+                                'packages/panorama/assets/images/Frame_1261158946.svg',
                                 width: 48,
                                 height: 36,
                               ),
@@ -163,11 +150,7 @@ class VideoRecorderScreen extends StatelessWidget {
                                 child: Text(
                                   "Aligning the line during recording will enhance your 360 results significantly",
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Color(0xFFFFFFFF),
-                                    fontFamily: 'Inter',
-                                  ),
+                                  style: TextStyle(fontSize: 12, color: Color(0xFFFFFFFF), fontFamily: 'Inter'),
                                 ),
                               ),
                             ],
@@ -187,25 +170,19 @@ class VideoRecorderScreen extends StatelessWidget {
                         child: Card(
                           color: Colors.black.withOpacity(0.9),
                           elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SvgPicture.asset(
-                                  'lib/assets/images/Frame.svg',
-                                  width: 50,
-                                  height: 50,
-                                ),
+                                SvgPicture.asset('packages/panorama/assets/images/Frame.svg', width: 50, height: 50),
                                 const SizedBox(width: 8),
                                 const Flexible(
                                   child: Text(
                                     "Keep your phone steady and slide it "
-                                        "to the left until the progress bar "
-                                        "is completely filled",
+                                    "to the left until the progress bar "
+                                    "is completely filled",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                       fontSize: 12,
@@ -237,9 +214,7 @@ class VideoRecorderScreen extends StatelessWidget {
                               visible: isRecording,
                               child: Flexible(
                                 child: Container(
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context).size.width * 0.3,
-                                  ),
+                                  constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.3),
                                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.6),
@@ -264,26 +239,24 @@ class VideoRecorderScreen extends StatelessWidget {
                             ),
                             isRecording
                                 ? InkWell(
-                              onTap: () async {
-                                await cubit.stopRecording();
-                              },
-                              child: const CenterCompassArrow(),
-                            )
+                                  onTap: () async {
+                                    await cubit.stopRecording();
+                                  },
+                                  child: const CenterCompassArrow(),
+                                )
                                 : InkWell(
-                              onTap: cubit.startRecording,
-                              child: SvgPicture.asset(
-                                'lib/assets/images/Oval.svg',
-                                width: 100,
-                                height: 100,
-                              ),
-                            ),
+                                  onTap: cubit.startRecording,
+                                  child: SvgPicture.asset(
+                                    'packages/panorama/assets/images/Oval.svg',
+                                    width: 100,
+                                    height: 100,
+                                  ),
+                                ),
                             Visibility(
                               visible: isRecording,
                               child: Flexible(
                                 child: Container(
-                                  constraints: BoxConstraints(
-                                    maxWidth: MediaQuery.of(context).size.width * 0.3,
-                                  ),
+                                  constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.3),
                                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.6),
@@ -296,10 +269,7 @@ class VideoRecorderScreen extends StatelessWidget {
                                         width: 16,
                                         height: 16,
                                         margin: const EdgeInsets.only(right: 6),
-                                        decoration: const BoxDecoration(
-                                          color: Colors.red,
-                                          shape: BoxShape.circle,
-                                        ),
+                                        decoration: const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
                                       ),
                                       Text(
                                         cubit.formatDuration(recordingSeconds),
@@ -338,34 +308,26 @@ class VideoRecorderScreen extends StatelessWidget {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => VideoReadyScreen(
-                                      cameras: cameras,
-                                      cameraController: cameraController,
-                                    ),
+                                    builder:
+                                        (context) =>
+                                            VideoReadyScreen(cameras: cameras, cameraController: cameraController),
                                   ),
                                 );
                               },
                               child: SvgPicture.asset(
-                                'lib/assets/images/Button.svg',
+                                'packages/panorama/assets/images/Button.svg',
                                 width: 200,
                                 height: 50,
                               ),
                             ),
                           ),
-                          if (isRecording)
-                            const Padding(
-                              padding: EdgeInsets.only(right: 10),
-                              child: CompassArrow(),
-                            ),
+                          if (isRecording) const Padding(padding: EdgeInsets.only(right: 10), child: CompassArrow()),
                         ],
                       ),
                     ),
                   ),
                   if (state is VideoRecorderUploading)
-                    Container(
-                      color: Colors.black54,
-                      child: const Center(child: CircularProgressIndicator()),
-                    ),
+                    Container(color: Colors.black54, child: const Center(child: CircularProgressIndicator())),
                 ],
               ),
             );

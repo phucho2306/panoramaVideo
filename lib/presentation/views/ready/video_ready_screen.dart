@@ -9,19 +9,12 @@ class VideoReadyScreen extends StatelessWidget {
   final List<CameraDescription> cameras;
   final CameraController cameraController;
 
-  const VideoReadyScreen({
-    Key? key,
-    required this.cameras,
-    required this.cameraController,
-  }) : super(key: key);
+  const VideoReadyScreen({Key? key, required this.cameras, required this.cameraController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => VideoReadyCubit(
-        cameraController: cameraController,
-        cameras: cameras,
-      ),
+      create: (context) => VideoReadyCubit(cameraController: cameraController, cameras: cameras),
       child: Scaffold(
         body: BlocBuilder<VideoReadyCubit, VideoReadyState>(
           builder: (context, state) {
@@ -34,14 +27,8 @@ class VideoReadyScreen extends StatelessWidget {
                 children: [
                   Stack(
                     children: [
-                      SizedBox.expand(
-                        child: CameraPreview(state.cameraController),
-                      ),
-                      SizedBox.expand(
-                        child: Container(
-                          color: Colors.black.withOpacity(0.7),
-                        ),
-                      ),
+                      SizedBox.expand(child: CameraPreview(state.cameraController)),
+                      SizedBox.expand(child: Container(color: Colors.black.withOpacity(0.7))),
                     ],
                   ),
                   Opacity(
@@ -60,7 +47,7 @@ class VideoReadyScreen extends StatelessWidget {
                                     Navigator.pop(context); // Quay lại màn hình trước đó
                                   },
                                   child: SvgPicture.asset(
-                                    'lib/assets/images/Button.svg',
+                                    'packages/panorama/assets/images/Button.svg',
                                     width: 100,
                                     height: 50,
                                     fit: BoxFit.contain,
@@ -72,7 +59,7 @@ class VideoReadyScreen extends StatelessWidget {
                           Column(
                             children: [
                               SvgPicture.asset(
-                                'lib/assets/images/IconReady.svg',
+                                'packages/panorama/assets/images/IconReady.svg',
                                 width: 165,
                                 height: 165,
                               ),
@@ -96,11 +83,7 @@ class VideoReadyScreen extends StatelessWidget {
                                 child: Text(
                                   'Holding your phone steady while rotating helps enhance the image quality during a 360 tour.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontFamily: 'Inter',
-                                  ),
+                                  style: TextStyle(color: Colors.white, fontSize: 14, fontFamily: 'Inter'),
                                 ),
                               ),
                             ],
@@ -112,11 +95,7 @@ class VideoReadyScreen extends StatelessWidget {
                                 child: Text(
                                   'Move closer to the door to start your first point in the 360 tour',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontFamily: 'Inter',
-                                  ),
+                                  style: TextStyle(color: Colors.white, fontSize: 14, fontFamily: 'Inter'),
                                 ),
                               ),
                               const SizedBox(height: 25),
@@ -129,10 +108,11 @@ class VideoReadyScreen extends StatelessWidget {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => VideoRecorderScreen(
-                                            cameras: cameras,
-                                            cameraController: state.cameraController,
-                                          ),
+                                          builder:
+                                              (context) => VideoRecorderScreen(
+                                                cameras: cameras,
+                                                cameraController: state.cameraController,
+                                              ),
                                         ),
                                       );
                                     },
@@ -140,10 +120,7 @@ class VideoReadyScreen extends StatelessWidget {
                                       backgroundColor: const Color(0xFFCD9B4B),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(99),
-                                        side: const BorderSide(
-                                          color: Colors.white,
-                                          width: 4,
-                                        ),
+                                        side: const BorderSide(color: Colors.white, width: 4),
                                       ),
                                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                                     ),
